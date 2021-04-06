@@ -1,17 +1,28 @@
-import { useContext } from "react";
-import { GlobalStateContext } from "../global/GlobalState";
-import { PokemonCard } from "./PokemonCard";
+import { PokemonCard } from "./PokemonCard"
 
-export function Main({ pokemons }) {
-  const data = useContext(GlobalStateContext)
-  console.log(data);
+export function Main(props) {
+
+  const addToPokedex = (pokemon) => {
+    props.setPokedex([...props.pokedex, pokemon])
+    props.setPokemons(props.pokemons.filter(array => {
+      return array.name !== pokemon.name
+    }))
+  }
+
+  const removeFromPokedex = (pokemon) => {
+    props.setPokedex(props.pokemons.filter(array => {
+      return array.name !== pokemon.name
+    }))
+
+  }
 
   return (
     <ul className="flex flex-wrap justify-center">
-      {pokemons.map((pokemon, index) => (
+      {props.pokemons.map((pokemon, index) => (
         <PokemonCard key={index}
           pokemon={pokemon}
           index={index}
+          leftButton={props.isPokedex ? () => { removeFromPokedex(pokemon) } : () => { addToPokedex(pokemon) }}
         />
       ))}
     </ul>

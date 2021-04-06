@@ -1,13 +1,16 @@
 import Head from 'next/head'
+import { useContext } from 'react'
 import { Header } from '../src/components/Header'
 import { Main } from '../src/components/Main'
+import { GlobalStateContext } from '../src/global/GlobalState'
 
-export default function Home({ pokemons }) {
+export default function Home() {
+  const data = useContext(GlobalStateContext)
 
   return (
-    <div className="bg-blue-500">
+    <div className="bg-blue-500 min-w-screen w-full min-h-screen h-full">
       <Head>
-        <title>Create Next App</title>
+        <title>Pokedex</title>
         <link rel="icon" href="/icons/pokemon-go.png" />
       </Head>
 
@@ -16,28 +19,12 @@ export default function Home({ pokemons }) {
       />
 
       <Main
-        pokemons={pokemons}
+        pokemons={data.states.pokemons}
+        setPokedex={data.setters.setPokedex}
+        setPokemons={data.setters.setPokemons}
+        pokedex={data.states.pokedex}
+        isPokedex={false}
       />
     </div>
   )
-}
-
-export async function getStaticProps() {
-
-  try {
-    const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=24&offset=0`)
-    const { results } = await response.json()
-    const pokemons = results.map((result, index) => {
-      const id = ('00' + (index + 1)).slice(-3);
-      const image = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${id}.png`;
-
-      return { ...result, image }
-    })
-
-    return { props: { pokemons } }
-  }
-
-  catch (error) {
-    console.error(error);
-  }
 }

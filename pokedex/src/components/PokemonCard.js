@@ -1,8 +1,7 @@
 import Link from "next/link";
 
-export function PokemonCard({ pokemon, index }) {
+export function PokemonCard({ pokemon, index, leftButton }) {
 
-  //<Link href={`/${pokemon.name}_${index}`}>
   return (
     <li key={index} className="bg-black m-2.5 opacity-80 hover:opacity-100 text-white rounded-md">
       <a>
@@ -12,12 +11,19 @@ export function PokemonCard({ pokemon, index }) {
       </a>
 
       <div className="flex">
-        <button className="bg-red-600 opacity-70 focus:outline-none hover:opacity-100 text-black container py-2 rounded-bl-md">
+        <button className="bg-red-600 opacity-70 focus:outline-none hover:opacity-100 text-black container py-2 rounded-bl-md"
+          onClick={leftButton}
+        >
           Capturar
           </button>
-        <button className="bg-red-600 opacity-70 focus:outline-none hover:opacity-100 text-black container py-2 rounded-br-md">
-          Detalhes
+        <Link href={`/details/${pokemon.index + 1}`}>
+          <button
+            className="bg-red-600 opacity-70 focus:outline-none hover:opacity-100 text-black container py-2 rounded-br-md"
+          >
+            Detalhes
           </button>
+        </Link>
+
       </div>
     </li>
   );
