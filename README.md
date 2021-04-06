@@ -1,2 +1,2 @@
 # Pokedex
-Pokemon website
+Pokemon website developed in Next.JS
