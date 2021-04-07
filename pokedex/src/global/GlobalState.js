@@ -4,14 +4,8 @@ import axios from 'axios'
 export const GlobalStateContext = React.createContext();
 
 export function GlobalState({ children }) {
-  const [pokemonsList, setPokemonsList] = useState([])
   const [pokemons, setPokemons] = useState([])
   const [pokedex, setPokedex] = useState([])
-
-  useEffect(() => {
-
-    console.log(pokedex);
-  }, [pokedex])
 
   //Get pokemons array
   const getPokemons = async () => {
@@ -33,23 +27,9 @@ export function GlobalState({ children }) {
   }, [])
   //Get pokemons array
 
-  const orderPokemons = () => {
-    let orderedPokemons = []
-    orderedPokemons = pokemons.sort((a, b) => {
-      if (a.order > b.order) {
-        return 1;
-      }
-      if (a.order < b.order) {
-        return -1;
-      }
-      return 0;
-    })
-    setPokemons(orderedPokemons);
-  }
-
   const states = { pokemons, pokedex }
   const setters = { setPokedex, setPokemons }
-  const requests = { orderPokemons }
+  const requests = {}
 
   const data = { states, setters, requests }
 
