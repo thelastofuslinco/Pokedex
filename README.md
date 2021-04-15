@@ -14,7 +14,7 @@ npm run dev to start the application.
 <br/>
 Any help you need to start coding javaScript in Next.js <a href="https://nextjs.org/docs/getting-started">Next.JS</a>
 <br/>
-http://voiceless-smoke.surge.sh/
+
 <br/>
 <img src="./img/1.PNG" height="400px"/>
 <img src="./img/2.PNG" height="400px"/>
