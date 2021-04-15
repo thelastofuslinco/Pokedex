@@ -10,7 +10,7 @@ export function GlobalState({ children }) {
   //Get pokemons array
   const getPokemons = async () => {
     try {
-      const response = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=24&offset=0`)
+      const response = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=112&offset=0`)
       const pokemonsList = response.data.results.map((result, index) => {
         const id = ('00' + (index + 1)).slice(-3);
         const image = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${id}.png`;

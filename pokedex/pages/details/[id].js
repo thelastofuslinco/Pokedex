@@ -4,58 +4,56 @@ export default function Detail({ pokemon }) {
   console.log(pokemon)
 
   return (
-    <div className="bg-blue-500 min-w-screen w-full min-h-screen h-full">
+    <div className="min-w-screen w-full min-h-screen h-full">
       <Header
         isPokedex={true}
       />
 
-      <div className="flex justify-center flex-col text-center">
-        <div className="flex justify-center">
-          <img
-            src={pokemon.sprites.other["official-artwork"].front_default}
-            alt="pokemon"
-
-          />
-        </div>
-        <p>{pokemon.name}</p>
-        <div>
-          {pokemon.types.map((type, index) => {
-            return <span key={index}>
-              {type.type.name} </span>
-          })}
-        </div>
-        <p>{pokemon.weight} g</p>
-        <p>{pokemon.height}0 cm</p>
-        <strong>Status</strong>
-        <ul>{pokemon.stats.map((array, index) => {
-          return <li key={index}>
-
-            <div className="flex justify-center">
-              <div style={{ width: 300 }} className="pt-1" >
-                <div className="flex mb-2 items-center justify-between">
-                  <div>
-                    <span className="">
-                      {array.stat.name}
-                    </span>
-                  </div>
-
-                  <div className="text-right">
-                    <span className="text-xs font-semibold inline-block text-pink-600">
-                      {pokemon.base_experience}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="overflow-hidden h-2 mb-4 text-xs flex rounded bg-pink-200">
-                  <div style={{ width: array.base_stat }} className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-pink-500"></div>
-                </div>
-              </div>
+      <div className=" h-screen capitalize">
+        <div className="bg-blue-500 h-full flex items-center justify-center">
+          <div className="bg-green-700 px-4 py-1 rounded border-8 border-yellow-500 bg-red-600">
+            <div className="flex justify-between">
+              <strong>{pokemon.name}</strong>
+              <strong className="box">{pokemon.stats[0].base_stat} {pokemon.stats[0].stat.name.toUpperCase()}</strong>
             </div>
-          </li>
-        })}</ul>
 
+            <div className="border-8 border-yellow-600 bg-red-600 rounded">
+              <img
+                src={pokemon.sprites.other["official-artwork"].front_default}
+                alt="pokemon"
+                className="h-52"
+              />
+            </div>
+
+            <div className="flex justify-around shadow">
+              {pokemon.types.map((type, index) => {
+                return <span key={index} className="bg-red-300 rounded px-2 py-1 mt-2">
+                  {type.type.name} </span>
+              })}
+            </div>
+
+            <p>weight: {(pokemon.weight) / 10} kg</p>
+            <p>size: {pokemon.height}0 cm</p>
+            <hr />
+            {pokemon.abilities.map((array, index) => {
+              return <p key={index}>
+                {array.ability.name}
+              </p>
+            })}
+            <hr />
+            <strong>Stats</strong>
+            <ul>{pokemon.stats.map((array, index) => {
+              if (index !== 0) {
+                return <li key={index}>
+                  {array.stat.name} {array.base_stat}
+                </li>
+              }
+            })}</ul>
+
+          </div>
+
+        </div>
       </div>
-
 
     </div>
   )
